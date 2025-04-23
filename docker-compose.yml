@@ -14,9 +14,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /media/arr/radarr/config:/config
-      - /media/arr/radarr/movies:/movies #optional
-      - /media/arr/qbittorrent/downloads:/downloads #optional
+      - /volume1/docker/arr/radarr/config:/config
+      - /volume2/MEDIA/Movies:/movies #optional
+      - /volume2/Downloads:/downloads #optional
     restart: unless-stopped
     
 ############################
@@ -32,9 +32,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /media/arr/sonarr/config:/config
-      - /media/arr/sonarr/tvseries:/tv #optional
-      - /media/arr/qbittorrent/downloads:/downloads #optional
+      - /volume1/docker/arr/sonarr/config:/config
+      - /volume2/MEDIA/TV shows:/tv #optional
+      - /volume2/Downloads:/downloads #optional
     restart: unless-stopped
     
 ############################
@@ -50,7 +50,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /media/arr/prowlarr/config:/config
+      - /volume1/docker/arr/prowlarr/config:/config
     restart: unless-stopped
 
 ############################
@@ -66,9 +66,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /media/arr/bazarr/config:/config
-      - /media/arr/radarr/movies:/movies #optional
-      - /media/arr/sonarr/tvseries:/tv #optional
+      - /volume1/docker/arr/bazarr/config:/config
+      - /volume2/MEDIA/Movies:/movies #optional
+      - /volume2/MEDIA/TV shows:/tv #optional
     restart: unless-stopped
     
 ############################
@@ -84,9 +84,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /media/arr/lidarr/config:/config
-      - /media/arr/lidarr/music:/music #optional
-      - /media/arr/qbittorrent/downloads:/downloads #optional
+      - /volume1/docker/arr/lidarr/config:/config
+      - /volume2/MEDIA/Music:/music #optional
+      - /volume2/Downloads:/downloads #optional
     restart: unless-stopped
     
 ############################
@@ -102,9 +102,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /media/arr/readarr/config:/config
-      - /media/arr/readarr/books:/books #optional
-      - /media/arr/qbittorrent/downloads:/downloads #optional
+      - /volume1/docker/arr/readarr/config:/config
+      - /volume2/MEDIA/Books:/books #optional
+      - /volume2/Downloads:/downloads #optional
     restart: unless-stopped
     
 ############################
@@ -122,30 +122,8 @@ services:
       - WEBUI_PORT=8080
       - TORRENTING_PORT=6881
     volumes:
-      - /media/arr/qbittorrent/config:/config
-      - /media/arr/qbittorrent/downloads:/downloads #optional
-    restart: unless-stopped
-    
-############################
-# JELLYFIN	
-############################
-
-  jellyfin:
-    image: lscr.io/linuxserver/jellyfin:latest
-    container_name: jellyfin
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - /media/arr/jellyfin/config:/config
-      - /media/arr/sonarr/tvseries:/data/tvshows
-      - /media/arr/radarr/movies:/data/movies
-    ports:
-      - 8096:8096
-      - 8920:8920 #optional
-      - 7359:7359/udp #optional
-      - 1900:1900/udp #optional
+      - /volume1/docker/arr/qbittorrent/config:/config
+      - /volume2/Downloads:/downloads #optional
     restart: unless-stopped
     
 ############################
